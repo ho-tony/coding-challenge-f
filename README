@@ -1,6 +1,6 @@
 # How to run 
 
-Use ```npm install``` to run all packages.
+Use `npm install` to run all packages.
 
 To start the server, use ```npm start```
 
