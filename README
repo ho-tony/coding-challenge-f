@@ -1,0 +1,9 @@
+# How to run 
+
+Use ```npm install``` to run all packages.
+
+To start the server, use ```npm start```
+
+I included a script to run the example in the specifications. To run the script use ```./send_request.sh```
+
+Be sure to delete the database everytime you rerun the server or you'll run into issues.

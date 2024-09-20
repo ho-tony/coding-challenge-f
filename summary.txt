@@ -1,0 +1,26 @@
+# Summary
+
+Why did you choose the tools, libraries, and language you used for the coding exercise?
+
+The tech stack I selected is Fastify, JavaScript, SQLite, and better-sqlite3 for this REST API. Honestly, I've actually never used anything in the main tech stack, so I chose this because I felt that it perfectly fits the use case and  it would give me an excuse to learn more about Fastify as Express seems to becoming more "mature" as each update seems to be less feature-packed. 
+
+If you're not familiar with Fastify, it's an alternative to Express which had been the primer framework for creating REST API in NodeJS. Fastify is speedy, light-weight, minimal boiler plate, and has native json support (with schema-based validation), and has a much more involved development team. Obviously, this excerise did not have a huge scope in terms of scale, but I wanted something futureproof in the event we needed something "more" for a later exercise. 
+
+As for SQLite and better-sqlite3, obviously, it would be a bit much to spin up a database on the cloud, and sqlite is perfect for this use case where there's no need to create a docker container or anything like that if someone were to review this code. Better SQLite allows for synchronous code, so if we ever wanted to multithread SQL queries, we could. 
+
+I picked JavaScript over modern backend languages like Go for instance because I like simplicity. I think the syntax is fairly easy to read as JavaScript is commonly used in both frontend and backend, so it's likely that most people are at least somewhat familar with it. Likewise, I don't need the extra speed in Go, Java, Rust, etc. 
+
+
+2. What are the advantages and disadvantages of your solution?
+
+The biggest advantage is that hypothetically I should be using the least amount of memory possible (assuming we implement an sweeping algorithm that cleans old transactions). This is because the only things we need are the transactions themselves to perform all operations needed. We did not use extra memory to store user balances, or added any complexity with that. This also keeps things fairly simple to understand as we only need to keep track of one table.
+
+There is some advantages in my solution in futureproofing. Fastify is faster than Express, so in terms of vertical scaling, it saves us money if we were going to have the same exact copy in Express. Logging has low performance overhead as well in fastify. We can also have an easy time creating multithreading on databases as better-sqlite3 introduces synchronous sqlite operations.  
+
+I took some liberties due to the scope of the project. For example, the server increments id on each transaction, means you have to clear the database everytime you rerun the server (as id's will rematch). A better way would be the create hashing algoirthm with minimal collisions, but I felt that was beyond the scope of this project. 
+
+Another thing to consider is that I don't delete any transactions in history even when I spent the money from the transaction. I leave the value as zero. An easy solution to this is to periodically clean old transactions that are 0 except for the first transaction that a person has made (so we still have a copy of the username). Alternatively, we can just store a separate table of all the usernames. 
+
+3. What has been a favorite school/personal project thus far? What about it that challenged you?
+
+I took a graduate-level cyrptographic systems class where we had to build a rest api server that encrypted people's API keys to send messages. After we build it we to create an attack on this insecure system by mimicking API Keys and retrieve messages through a format padding attack. This was a really challenging project because there were a lot of moving parts (since we had to first build the system from scratch and then break it) and the solution with regarding the format padding attack was something we needed to think of ourselves. By the end of the semester, the class had shown me a lot a field of math and computer science that I really enjoyed. 
